@@ -882,6 +882,22 @@ namespace ModelCompiler
             File.Delete(outputFile);
         }
 
+        private void UpdateExtensions(string filePath)
+        {
+            using (Stream istrm = m_fileSystem.OpenRead(filePath))
+            {
+                Opc.Ua.Export.UANodeSet nodeSet = Opc.Ua.Export.UANodeSet.Read(istrm);
+                istrm.Close();
+
+                nodeSet.Extensions = m_model.Extensions;
+
+                using (Stream ostrm = m_fileSystem.OpenWrite(filePath))
+                {
+                    nodeSet.Write(ostrm);
+                }
+            }
+        }
+
         /// <summary>
         /// Generate nodeset 2 xml file
         /// </summary>
@@ -944,6 +960,8 @@ namespace ModelCompiler
                     WritePermissions(context, identifiersFilePath, collectionWithServices);
                 }
             }
+
+            UpdateExtensions(outputFile);
 
             // load as node set.
             using (Stream istrm = m_fileSystem.OpenRead(outputFile))
