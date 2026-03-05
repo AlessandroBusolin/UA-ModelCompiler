@@ -23,9 +23,6 @@ All of the standard outputs are published in the [Nodeset GitHub repository](htt
 
 Developers should never need to build the standard outputs themselves.
 
-**2022-10-15: out of date due to changes needed to support NodeSet2 as an input format**<br/>
-Tutorial by Stefan Profanter [here](https://opcua.rocks/custom-information-models/).
-
 Command line parameters for ModelDesigns or NodeSets:
 ```
 Takes an OPC UA ModelDesign file and generates a NodeSet and code for the .NETStandard stack.
